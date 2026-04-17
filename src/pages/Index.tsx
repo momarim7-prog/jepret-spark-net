@@ -1,16 +1,36 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import TopBar from "@/components/TopBar";
+import BottomNav from "@/components/BottomNav";
+import Hero from "@/components/Hero";
+import ServiceCategories from "@/components/ServiceCategories";
+import WalletCard from "@/components/WalletCard";
+import ServiceTiers from "@/components/ServiceTiers";
+import TalentGrid from "@/components/TalentGrid";
+import InvoicePreview from "@/components/InvoicePreview";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
+    <div className="min-h-screen bg-background relative">
+      <TopBar />
+      <main className="relative z-10 pb-32 max-w-md mx-auto">
+        <Hero />
+        <ServiceCategories />
+        <WalletCard />
+        <ServiceTiers />
+        <TalentGrid />
+        <InvoicePreview />
+
+        <footer className="px-5 mt-14 text-center">
+          <div className="font-display italic text-lg text-muted-foreground">
+            "No more <span className="line-through">WhatsApp</span> bottleneck."
+          </div>
+          <div className="mt-2 text-[10px] tracking-[0.3em] uppercase text-amber">
+            Jepretin · Made in Indonesia
+          </div>
+        </footer>
+      </main>
+      <BottomNav />
     </div>
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;
