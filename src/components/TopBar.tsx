@@ -1,14 +1,17 @@
 import { Search, Bell, MapPin } from "lucide-react";
+import jepretinLogo from "@/assets/jepretin-logo.png";
 
 const TopBar = () => {
   return (
     <header className="sticky top-0 z-40 glass">
       <div className="px-5 pt-3 pb-3 flex items-center gap-3">
         <div className="flex flex-col leading-none">
-          <span className="font-display text-2xl font-black tracking-tight text-gradient-golden">
-            Jepretin
-          </span>
-          <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-0.5 flex items-center gap-1">
+          <img
+            src={jepretinLogo}
+            alt="Jepretin — Indonesia's Creative Talent Network"
+            className="h-6 w-auto object-contain"
+          />
+          <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-1.5 flex items-center gap-1">
             <MapPin className="w-2.5 h-2.5 text-amber" />
             Jakarta · 20km
           </span>
