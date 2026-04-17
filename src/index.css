@@ -12,71 +12,71 @@
 @layer base {
   :root {
     /* Surfaces — obsidian / charcoal */
-    --background: 24 10% 5%;
-    --foreground: 36 30% 94%;
+    --background: 0 0% 4%;
+    --foreground: 0 15% 95%;
 
-    --card: 24 8% 8%;
-    --card-foreground: 36 30% 94%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 15% 95%;
 
-    --popover: 24 10% 6%;
-    --popover-foreground: 36 30% 94%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 15% 95%;
 
-    /* Neon Amber — primary brand */
-    --primary: 38 95% 58%;
-    --primary-foreground: 24 30% 6%;
+    /* Neon Crimson — primary brand */
+    --primary: 0 85% 55%;
+    --primary-foreground: 0 0% 6%;
 
-    /* Golden hour glow (deeper amber) */
-    --accent: 28 90% 52%;
-    --accent-foreground: 24 30% 6%;
+    /* Deep blood red glow */
+    --accent: 0 90% 45%;
+    --accent-foreground: 0 0% 6%;
 
-    --secondary: 24 8% 12%;
-    --secondary-foreground: 36 20% 88%;
+    --secondary: 0 0% 11%;
+    --secondary-foreground: 0 10% 88%;
 
-    --muted: 24 6% 14%;
-    --muted-foreground: 36 8% 60%;
+    --muted: 0 0% 13%;
+    --muted-foreground: 0 5% 60%;
 
-    --destructive: 0 75% 55%;
-    --destructive-foreground: 36 30% 96%;
+    --destructive: 15 80% 50%;
+    --destructive-foreground: 0 15% 96%;
 
-    --border: 30 8% 16%;
-    --input: 30 8% 14%;
-    --ring: 38 95% 58%;
+    --border: 0 10% 15%;
+    --input: 0 10% 13%;
+    --ring: 0 85% 55%;
 
     --radius: 1rem;
 
-    /* Brand-specific tokens */
-    --amber: 38 95% 58%;
-    --amber-glow: 42 100% 65%;
-    --amber-deep: 28 90% 45%;
-    --obsidian: 24 12% 4%;
-    --charcoal: 24 8% 9%;
-    --charcoal-elevated: 24 7% 12%;
+    /* Brand-specific tokens (kept names for compatibility) */
+    --amber: 0 85% 55%;
+    --amber-glow: 0 95% 65%;
+    --amber-deep: 0 90% 40%;
+    --obsidian: 0 0% 3%;
+    --charcoal: 0 0% 8%;
+    --charcoal-elevated: 0 0% 11%;
 
     /* Gradients */
-    --gradient-golden: linear-gradient(135deg, hsl(42 100% 65%) 0%, hsl(38 95% 58%) 40%, hsl(28 90% 45%) 100%);
-    --gradient-radial-amber: radial-gradient(circle at 30% 20%, hsl(38 95% 58% / 0.18), transparent 60%);
-    --gradient-hero: linear-gradient(180deg, hsl(24 12% 4% / 0) 0%, hsl(24 12% 4% / 0.6) 60%, hsl(24 12% 4%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(24 8% 11%) 0%, hsl(24 8% 7%) 100%);
+    --gradient-golden: linear-gradient(135deg, hsl(0 95% 65%) 0%, hsl(0 85% 55%) 40%, hsl(0 90% 38%) 100%);
+    --gradient-radial-amber: radial-gradient(circle at 30% 20%, hsl(0 85% 55% / 0.2), transparent 60%);
+    --gradient-hero: linear-gradient(180deg, hsl(0 0% 3% / 0) 0%, hsl(0 0% 3% / 0.6) 60%, hsl(0 0% 3%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 10%) 0%, hsl(0 0% 6%) 100%);
 
     /* Shadows — cinematic glow */
-    --shadow-glow: 0 0 60px hsl(38 95% 58% / 0.35), 0 0 20px hsl(38 95% 58% / 0.2);
-    --shadow-amber: 0 10px 40px -10px hsl(38 95% 58% / 0.5);
-    --shadow-deep: 0 30px 60px -15px hsl(0 0% 0% / 0.7);
+    --shadow-glow: 0 0 60px hsl(0 85% 55% / 0.4), 0 0 20px hsl(0 85% 55% / 0.25);
+    --shadow-amber: 0 10px 40px -10px hsl(0 85% 55% / 0.55);
+    --shadow-deep: 0 30px 60px -15px hsl(0 0% 0% / 0.75);
     --shadow-soft: 0 8px 30px -8px hsl(0 0% 0% / 0.5);
 
     /* Motion */
     --ease-cinema: cubic-bezier(0.22, 1, 0.36, 1);
     --transition-smooth: all 0.5s var(--ease-cinema);
 
-    /* Sidebar (unused but kept) */
-    --sidebar-background: 24 10% 5%;
-    --sidebar-foreground: 36 30% 94%;
-    --sidebar-primary: 38 95% 58%;
-    --sidebar-primary-foreground: 24 30% 6%;
-    --sidebar-accent: 24 8% 12%;
-    --sidebar-accent-foreground: 36 30% 94%;
-    --sidebar-border: 30 8% 16%;
-    --sidebar-ring: 38 95% 58%;
+    /* Sidebar */
+    --sidebar-background: 0 0% 4%;
+    --sidebar-foreground: 0 15% 95%;
+    --sidebar-primary: 0 85% 55%;
+    --sidebar-primary-foreground: 0 0% 6%;
+    --sidebar-accent: 0 0% 11%;
+    --sidebar-accent-foreground: 0 15% 95%;
+    --sidebar-border: 0 10% 15%;
+    --sidebar-ring: 0 85% 55%;
   }
 }
 
@@ -92,8 +92,8 @@
     font-family: 'Inter', system-ui, sans-serif;
     font-feature-settings: 'ss01', 'cv11';
     background-image:
-      radial-gradient(ellipse 80% 50% at 50% -10%, hsl(38 95% 58% / 0.08), transparent),
-      radial-gradient(ellipse 60% 40% at 90% 90%, hsl(28 90% 45% / 0.06), transparent);
+      radial-gradient(ellipse 80% 50% at 50% -10%, hsl(0 85% 55% / 0.1), transparent),
+      radial-gradient(ellipse 60% 40% at 90% 90%, hsl(0 90% 40% / 0.07), transparent);
     background-attachment: fixed;
   }
 
