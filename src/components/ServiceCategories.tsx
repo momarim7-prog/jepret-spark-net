@@ -14,50 +14,57 @@ import {
   Wifi,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const onsiteCategories = [
-  { name: "Fotoin", Icon: Camera },
-  { name: "Videoin", Icon: Video },
-  { name: "Make-up-in", Icon: Brush },
-  { name: "Style-in", Icon: Shirt },
-  { name: "Sutradarain", Icon: Clapperboard },
-  { name: "Suarain", Icon: Mic },
-  { name: "Terangin", Icon: Lightbulb },
-  { name: "Bantuin", Icon: HandHelping },
+  { name: "Fotoin", Icon: Camera, slug: "fotoin" },
+  { name: "Videoin", Icon: Video, slug: "videoin" },
+  { name: "Make-up-in", Icon: Brush, slug: "makeupin" },
+  { name: "Style-in", Icon: Shirt, slug: "stylein" },
+  { name: "Sutradarain", Icon: Clapperboard, slug: "sutradarain" },
+  { name: "Suarain", Icon: Mic, slug: "suarain" },
+  { name: "Terangin", Icon: Lightbulb, slug: "terangin" },
+  { name: "Bantuin", Icon: HandHelping, slug: "bantuin" },
 ];
 
 const onlineCategories = [
-  { name: "Editin", Icon: Scissors },
-  { name: "Desain-in", Icon: Palette },
-  { name: "3Din", Icon: Box },
+  { name: "Editin", Icon: Scissors, slug: "editin" },
+  { name: "Desain-in", Icon: Palette, slug: "desainin" },
+  { name: "3Din", Icon: Box, slug: "3din" },
 ];
 
 const CategoryGrid = ({
   items,
   startDelay = 0,
+  type,
 }: {
-  items: { name: string; Icon: typeof Camera }[];
+  items: { name: string; Icon: typeof Camera; slug: string }[];
   startDelay?: number;
-}) => (
-  <div className="grid grid-cols-4 gap-x-3 gap-y-5">
-    {items.map((c, i) => (
-      <motion.button
-        key={c.name}
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: startDelay + i * 0.03, duration: 0.4 }}
-        className="group flex flex-col items-center gap-2"
-      >
-        <div className="w-14 h-14 rounded-2xl bg-gradient-card border border-border/60 flex items-center justify-center shadow-soft group-hover:border-amber/60 group-hover:shadow-amber transition-all">
-          <c.Icon className="w-6 h-6 text-amber" strokeWidth={2.2} />
-        </div>
-        <span className="text-[11px] font-medium text-foreground/90 text-center leading-tight">
-          {c.name}
-        </span>
-      </motion.button>
-    ))}
-  </div>
-);
+  type: "onsite" | "online";
+}) => {
+  const navigate = useNavigate();
+  return (
+    <div className="grid grid-cols-4 gap-x-3 gap-y-5">
+      {items.map((c, i) => (
+        <motion.button
+          key={c.name}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: startDelay + i * 0.03, duration: 0.4 }}
+          onClick={() => navigate(`/book/${type}/${c.slug}`)}
+          className="group flex flex-col items-center gap-2"
+        >
+          <div className="w-14 h-14 rounded-2xl bg-gradient-card border border-border/60 flex items-center justify-center shadow-soft group-hover:border-amber/60 group-hover:shadow-amber transition-all">
+            <c.Icon className="w-6 h-6 text-amber" strokeWidth={2.2} />
+          </div>
+          <span className="text-[11px] font-medium text-foreground/90 text-center leading-tight">
+            {c.name}
+          </span>
+        </motion.button>
+      ))}
+    </div>
+  );
+};
 
 const ServiceCategories = () => {
   return (
@@ -84,7 +91,7 @@ const ServiceCategories = () => {
         </div>
       </div>
       <div className="mb-6">
-        <CategoryGrid items={onsiteCategories} />
+        <CategoryGrid items={onsiteCategories} type="onsite" />
       </div>
 
       {/* Online */}
@@ -101,7 +108,7 @@ const ServiceCategories = () => {
           </p>
         </div>
       </div>
-      <CategoryGrid items={onlineCategories} startDelay={0.24} />
+      <CategoryGrid items={onlineCategories} startDelay={0.24} type="online" />
     </section>
   );
 };
