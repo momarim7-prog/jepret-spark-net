@@ -1,46 +1,57 @@
-import { Camera, Video, Mic, Palette, Scissors, MapPin, Wifi } from "lucide-react";
+import {
+  Camera,
+  Video,
+  Scissors,
+  Palette,
+  Box,
+  Brush,
+  Shirt,
+  Clapperboard,
+  Mic,
+  Lightbulb,
+  HandHelping,
+} from "lucide-react";
 import { motion } from "framer-motion";
 
 const categories = [
-  { name: "Fotoin", Icon: Camera, type: "On-site", radius: "20km", color: "from-amber-glow to-amber" },
-  { name: "Videoin", Icon: Video, type: "On-site", radius: "20km", color: "from-amber to-amber-deep" },
-  { name: "Suarain", Icon: Mic, type: "On-site", radius: "20km", color: "from-amber-glow to-amber-deep" },
-  { name: "Desainin", Icon: Palette, type: "Remote", radius: "Anywhere", color: "from-amber to-amber-glow" },
-  { name: "Editin", Icon: Scissors, type: "Remote", radius: "Anywhere", color: "from-amber-deep to-amber" },
+  { name: "Fotoin", Icon: Camera },
+  { name: "Videoin", Icon: Video },
+  { name: "Editin", Icon: Scissors },
+  { name: "Desain-in", Icon: Palette },
+  { name: "3Din", Icon: Box },
+  { name: "Make-up-in", Icon: Brush },
+  { name: "Style-in", Icon: Shirt },
+  { name: "Sutradarain", Icon: Clapperboard },
+  { name: "Suarain", Icon: Mic },
+  { name: "Terangin", Icon: Lightbulb },
+  { name: "Bantuin", Icon: HandHelping },
 ];
 
 const ServiceCategories = () => {
   return (
-    <section className="px-5 mt-10">
-      <div className="flex items-end justify-between mb-4">
-        <div>
-          <h2 className="font-display text-2xl">Layanan</h2>
-          <p className="text-xs text-muted-foreground mt-0.5">Pilih kebutuhan kreatifmu</p>
-        </div>
-        <button className="text-xs text-amber font-medium">Semua →</button>
+    <section className="px-5 mt-6">
+      <div className="mb-4">
+        <h2 className="font-display text-2xl">Layanan Jepret</h2>
+        <p className="text-xs text-muted-foreground mt-0.5">
+          Pilih kebutuhan kreatifmu
+        </p>
       </div>
 
-      <div className="flex gap-3 overflow-x-auto -mx-5 px-5 pb-2 scrollbar-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="grid grid-cols-4 gap-x-3 gap-y-5">
         {categories.map((c, i) => (
           <motion.button
             key={c.name}
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.06, duration: 0.5 }}
-            className="group flex-shrink-0 w-[140px] bg-gradient-card border border-border/60 rounded-2xl p-4 text-left hover:border-amber/50 transition-all"
+            transition={{ delay: i * 0.03, duration: 0.4 }}
+            className="group flex flex-col items-center gap-2"
           >
-            <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${c.color} flex items-center justify-center mb-3 shadow-amber group-hover:scale-110 transition-transform`}>
-              <c.Icon className="w-5 h-5 text-primary-foreground" strokeWidth={2.2} />
+            <div className="w-14 h-14 rounded-2xl bg-gradient-card border border-border/60 flex items-center justify-center shadow-soft group-hover:border-amber/60 group-hover:shadow-amber transition-all">
+              <c.Icon className="w-6 h-6 text-amber" strokeWidth={2.2} />
             </div>
-            <h3 className="font-semibold text-sm">{c.name}</h3>
-            <div className="flex items-center gap-1 mt-1.5 text-[10px] text-muted-foreground">
-              {c.type === "On-site" ? (
-                <MapPin className="w-3 h-3 text-amber" />
-              ) : (
-                <Wifi className="w-3 h-3 text-amber" />
-              )}
-              <span>{c.radius}</span>
-            </div>
+            <span className="text-[11px] font-medium text-foreground/90 text-center leading-tight">
+              {c.name}
+            </span>
           </motion.button>
         ))}
       </div>

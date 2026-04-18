@@ -1,6 +1,5 @@
-import TopBar from "@/components/TopBar";
 import BottomNav from "@/components/BottomNav";
-import Hero from "@/components/Hero";
+import HeroSearch from "@/components/HeroSearch";
 import ServiceCategories from "@/components/ServiceCategories";
 import WalletCard from "@/components/WalletCard";
 import ServiceTiers from "@/components/ServiceTiers";
@@ -10,9 +9,8 @@ import InvoicePreview from "@/components/InvoicePreview";
 const Index = () => {
   return (
     <div className="min-h-screen bg-background relative">
-      <TopBar />
       <main className="relative z-10 pb-32 max-w-md mx-auto">
-        <Hero />
+        <HeroSearch />
         <ServiceCategories />
         <WalletCard />
         <ServiceTiers />
