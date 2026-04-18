@@ -13,7 +13,7 @@ export default {
     extend: {
       fontFamily: {
         display: ['"Playfair Display"', "Georgia", "serif"],
-        sans: ["Inter", "system-ui", "sans-serif"],
+        sans: ["Talina", "Inter", "system-ui", "sans-serif"],
         mono: ['"JetBrains Mono"', "monospace"],
       },
       colors: {
