@@ -125,7 +125,7 @@
 
 @layer utilities {
   .font-display {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Talina', 'Playfair Display', Georgia, serif;
     font-feature-settings: 'lnum';
   }
   .font-mono {
