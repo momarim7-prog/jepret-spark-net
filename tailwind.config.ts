@@ -12,7 +12,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['"Playfair Display"', "Georgia", "serif"],
+        display: ["Talina", '"Playfair Display"', "Georgia", "serif"],
         sans: ["Talina", "Inter", "system-ui", "sans-serif"],
         mono: ['"JetBrains Mono"', "monospace"],
       },
