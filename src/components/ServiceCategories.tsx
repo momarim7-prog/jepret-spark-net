@@ -75,6 +75,7 @@ const CategoryGrid = ({
 };
 
 const ServiceCategories = () => {
+  const navigate = useNavigate();
   return (
     <section className="px-5 mt-6">
       <div className="mb-4">
