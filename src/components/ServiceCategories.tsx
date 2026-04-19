@@ -60,8 +60,8 @@ const CategoryGrid = ({
           }
           className="group flex flex-col items-center gap-2"
         >
-          <div className="w-14 h-14 rounded-2xl bg-gradient-card border border-border/60 flex items-center justify-center shadow-soft group-hover:border-amber/60 group-hover:shadow-amber transition-all">
-            <c.Icon className="w-6 h-6 text-amber" strokeWidth={2.2} />
+          <div className="w-20 h-20 rounded-2xl bg-gradient-card border border-border/60 flex items-center justify-center shadow-soft group-hover:border-amber/60 group-hover:shadow-amber transition-all">
+            <c.Icon className="w-9 h-9 text-amber" strokeWidth={2.2} />
           </div>
           <span className="text-[11px] font-medium text-foreground/90 text-center leading-tight">
             {c.name}
