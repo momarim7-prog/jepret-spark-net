@@ -12,6 +12,7 @@ import OnlineBrowse from "./pages/OnlineBrowse.tsx";
 import Orders from "./pages/Orders.tsx";
 import Chat from "./pages/Chat.tsx";
 import Promos from "./pages/Promos.tsx";
+import BulkBooking from "./pages/BulkBooking.tsx";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/orders" element={<Orders />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/promos" element={<Promos />} />
+          <Route path="/bulk-booking" element={<BulkBooking />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
