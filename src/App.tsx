@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound.tsx";
 import BookTiming from "./pages/BookTiming.tsx";
 import BookNow from "./pages/BookNow.tsx";
 import BookPosted from "./pages/BookPosted.tsx";
+import OnlineBrowse from "./pages/OnlineBrowse.tsx";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/book/:type/:slug/now" element={<BookNow />} />
           <Route path="/book/:type/:slug/later" element={<BookNow />} />
           <Route path="/book/:type/:slug/posted" element={<BookPosted />} />
+          <Route path="/online/:slug" element={<OnlineBrowse />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

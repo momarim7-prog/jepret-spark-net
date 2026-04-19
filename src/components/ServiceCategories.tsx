@@ -51,7 +51,13 @@ const CategoryGrid = ({
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: startDelay + i * 0.03, duration: 0.4 }}
-          onClick={() => navigate(`/book/${type}/${c.slug}`)}
+          onClick={() =>
+            navigate(
+              type === "online"
+                ? `/online/${c.slug}`
+                : `/book/${type}/${c.slug}`
+            )
+          }
           className="group flex flex-col items-center gap-2"
         >
           <div className="w-14 h-14 rounded-2xl bg-gradient-card border border-border/60 flex items-center justify-center shadow-soft group-hover:border-amber/60 group-hover:shadow-amber transition-all">
