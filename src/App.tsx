@@ -13,6 +13,7 @@ import Orders from "./pages/Orders.tsx";
 import Chat from "./pages/Chat.tsx";
 import Promos from "./pages/Promos.tsx";
 import BulkBooking from "./pages/BulkBooking.tsx";
+import TalentProfile from "./pages/TalentProfile.tsx";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/chat" element={<Chat />} />
           <Route path="/promos" element={<Promos />} />
           <Route path="/bulk-booking" element={<BulkBooking />} />
+          <Route path="/talent/:id" element={<TalentProfile />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
