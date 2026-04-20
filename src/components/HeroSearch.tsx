@@ -5,7 +5,7 @@ const HeroSearch = () => {
   return (
     <section className="relative">
       {/* Background image */}
-      <div className="relative h-[280px] overflow-hidden">
+      <div className="relative h-[280px] md:h-[420px] lg:h-[520px] overflow-hidden">
         <img
           src={heroImg}
           alt="Indonesian creative talent in cinematic crimson light"
@@ -15,8 +15,8 @@ const HeroSearch = () => {
         <div className="absolute inset-0 bg-gradient-radial-amber" />
 
         {/* Top bar: search + profile */}
-        <div className="relative z-10 px-5 pt-6 flex items-center gap-3">
-          <div className="flex-1 relative">
+        <div className="relative z-10 px-5 lg:px-10 pt-6 flex items-center gap-3 max-w-7xl mx-auto">
+          <div className="flex-1 relative max-w-2xl">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <input
               type="text"

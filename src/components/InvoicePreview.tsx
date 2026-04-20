@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const InvoicePreview = () => {
   return (
-    <section className="px-5 mt-12">
+    <section className="px-5 lg:px-10 mt-12 max-w-3xl lg:mx-auto">
       <div className="mb-4">
         <span className="text-[11px] uppercase tracking-[0.25em] text-amber font-semibold">
           Invoicing Otomatis

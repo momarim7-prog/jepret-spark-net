@@ -74,14 +74,14 @@ const Orders = () => {
   const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-background relative">
-      <main className="relative z-10 pb-32 max-w-md mx-auto px-5 pt-10">
+      <main className="relative z-10 pb-32 max-w-6xl mx-auto px-5 lg:px-10 pt-10">
         <header className="mb-8">
           <div className="text-[10px] tracking-[0.3em] uppercase text-amber mb-2">Your Bookings</div>
           <h1 className="font-display text-4xl text-foreground">Orders</h1>
           <p className="text-sm text-muted-foreground mt-2">Track every gig you've booked.</p>
         </header>
 
-        <ul className="space-y-3">
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {orders.map((o) => {
             const cfg = statusConfig[o.status];
             return (

@@ -46,7 +46,7 @@ const CategoryGrid = ({
 }) => {
   const navigate = useNavigate();
   return (
-    <div className="grid grid-cols-4 gap-x-3 gap-y-5">
+    <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-x-3 gap-y-5">
       {items.map((c, i) => (
         <motion.button
           key={c.name}
@@ -77,7 +77,7 @@ const CategoryGrid = ({
 const ServiceCategories = () => {
   const navigate = useNavigate();
   return (
-    <section className="px-5 mt-6">
+    <section className="px-5 lg:px-10 mt-6">
       <div className="mb-4">
         <h2 className="font-display text-2xl">Layanan Jepret</h2>
         <p className="text-xs text-muted-foreground mt-0.5">

@@ -61,7 +61,7 @@ const copyCode = (code: string) => {
 const Promos = () => {
   return (
     <div className="min-h-screen bg-background relative">
-      <main className="relative z-10 pb-32 max-w-md mx-auto px-5 pt-10">
+      <main className="relative z-10 pb-32 max-w-6xl mx-auto px-5 lg:px-10 pt-10">
         <header className="mb-6">
           <div className="text-[10px] tracking-[0.3em] uppercase text-amber mb-2">Save More</div>
           <h1 className="font-display text-4xl text-foreground">Promos</h1>
@@ -95,7 +95,7 @@ const Promos = () => {
         </div>
 
         <h3 className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-3">All Promos</h3>
-        <ul className="space-y-3">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {promos.map((p) => (
             <li key={p.code} className="glass rounded-2xl p-4 flex items-start gap-3">
               <div className="w-12 h-12 rounded-xl bg-secondary border border-border flex items-center justify-center shrink-0">

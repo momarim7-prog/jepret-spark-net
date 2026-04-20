@@ -168,7 +168,7 @@ const BulkBooking = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <main className="max-w-md mx-auto px-5 pt-6 pb-40 relative z-10">
+      <main className="max-w-5xl mx-auto px-5 lg:px-10 pt-6 pb-40 relative z-10">
         <Link
           to="/"
           className="inline-flex items-center gap-2 text-xs text-muted-foreground hover:text-amber transition-colors"
@@ -214,7 +214,7 @@ const BulkBooking = () => {
           <h3 className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-2">
             On-site
           </h3>
-          <div className="grid grid-cols-3 gap-2.5">
+          <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2.5">
             {onsite.map((s) => (
               <ServiceTile key={s.slug} s={s} />
             ))}
@@ -223,7 +223,7 @@ const BulkBooking = () => {
           <h3 className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mt-5 mb-2">
             Online
           </h3>
-          <div className="grid grid-cols-3 gap-2.5">
+          <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2.5">
             {online.map((s) => (
               <ServiceTile key={s.slug} s={s} />
             ))}
@@ -288,7 +288,7 @@ const BulkBooking = () => {
         animate={{ y: 0 }}
         className="fixed bottom-0 inset-x-0 z-20 border-t border-border/60 bg-background/95 backdrop-blur-md"
       >
-        <div className="max-w-md mx-auto px-5 py-3">
+        <div className="max-w-5xl mx-auto px-5 lg:px-10 py-3">
           {count > 0 && (
             <div className="flex items-center justify-between text-[11px] mb-2">
               <span className="text-muted-foreground">
