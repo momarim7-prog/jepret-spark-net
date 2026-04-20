@@ -16,7 +16,7 @@ const talents = [
 const TalentGrid = () => {
   const navigate = useNavigate();
   return (
-    <section className="px-5 mt-12">
+    <section className="px-5 lg:px-10 mt-12">
       <div className="flex items-end justify-between mb-4">
         <div>
           <span className="text-[11px] uppercase tracking-[0.25em] text-amber font-semibold">
@@ -27,7 +27,7 @@ const TalentGrid = () => {
         <button className="text-xs text-amber font-medium">Lihat peta →</button>
       </div>
 
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-4">
         {talents.map((t, i) => (
           <motion.button
             key={t.name}

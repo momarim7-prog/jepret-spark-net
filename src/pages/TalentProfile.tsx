@@ -80,9 +80,9 @@ const TalentProfile = () => {
 
   return (
     <div className="min-h-screen bg-background pb-32 relative">
-      <div className="max-w-md mx-auto relative">
+      <div className="max-w-6xl mx-auto relative">
         {/* Hero */}
-        <div className="relative aspect-[4/5] overflow-hidden">
+        <div className="relative aspect-[4/5] md:aspect-[16/7] overflow-hidden">
           <img src={hero} alt={talent.name} className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/40 to-transparent" />
 
@@ -116,7 +116,7 @@ const TalentProfile = () => {
         </div>
 
         {/* Stats */}
-        <section className="px-5 -mt-6 relative z-10">
+        <section className="px-5 lg:px-10 -mt-6 relative z-10 max-w-3xl mx-auto">
           <div className="grid grid-cols-3 gap-2">
             {[
               { Icon: Star, label: "Rating", value: talent.rating, fill: true },
@@ -140,7 +140,7 @@ const TalentProfile = () => {
         </section>
 
         {/* About */}
-        <section className="px-5 mt-8">
+        <section className="px-5 lg:px-10 mt-8 max-w-3xl mx-auto">
           <span className="text-[11px] uppercase tracking-[0.25em] text-amber font-semibold">
             About
           </span>
@@ -158,13 +158,13 @@ const TalentProfile = () => {
         </section>
 
         {/* Tiers */}
-        <section className="px-5 mt-8">
+        <section className="px-5 lg:px-10 mt-8 max-w-5xl mx-auto">
           <span className="text-[11px] uppercase tracking-[0.25em] text-amber font-semibold">
             Pilih Paket
           </span>
           <h2 className="font-display text-2xl mt-1">Service tiers</h2>
 
-          <div className="space-y-3 mt-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4">
             {tiers.map((t, i) => (
               <motion.button
                 key={t.name}
@@ -208,7 +208,7 @@ const TalentProfile = () => {
         </section>
 
         {/* Portfolio */}
-        <section className="px-5 mt-8">
+        <section className="px-5 lg:px-10 mt-8 max-w-6xl mx-auto">
           <div className="flex items-end justify-between mb-3">
             <div>
               <span className="text-[11px] uppercase tracking-[0.25em] text-amber font-semibold">
@@ -217,7 +217,7 @@ const TalentProfile = () => {
               <h2 className="font-display text-2xl mt-1">Recent work</h2>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-2.5">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 lg:gap-4">
             {portfolio.map((src, i) => (
               <div
                 key={i}
@@ -238,9 +238,9 @@ const TalentProfile = () => {
         </section>
 
         {/* Reviews */}
-        <section className="px-5 mt-8">
+        <section className="px-5 lg:px-10 mt-8 max-w-6xl mx-auto">
           <h2 className="font-display text-2xl mb-3">What clients say</h2>
-          <div className="space-y-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {reviews.map((r) => (
               <div key={r.name} className="glass rounded-2xl p-4 border border-border/60">
                 <div className="flex items-center gap-3">
@@ -276,7 +276,7 @@ const TalentProfile = () => {
 
       {/* Sticky CTA */}
       <div className="fixed bottom-20 inset-x-0 z-40 px-4">
-        <div className="max-w-md mx-auto glass rounded-2xl border border-border/60 p-3 flex items-center gap-3 shadow-deep">
+        <div className="max-w-3xl mx-auto glass rounded-2xl border border-border/60 p-3 flex items-center gap-3 shadow-deep">
           <div className="flex-1 min-w-0">
             <p className="text-[10px] text-muted-foreground uppercase tracking-wider">From</p>
             <p className="font-display text-lg font-bold text-gradient-golden leading-tight">

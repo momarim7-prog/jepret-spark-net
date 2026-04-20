@@ -76,7 +76,7 @@ const chats = [
 const Chat = () => {
   return (
     <div className="min-h-screen bg-background relative">
-      <main className="relative z-10 pb-32 max-w-md mx-auto px-5 pt-10">
+      <main className="relative z-10 pb-32 max-w-3xl mx-auto px-5 lg:px-10 pt-10">
         <header className="mb-6">
           <div className="text-[10px] tracking-[0.3em] uppercase text-amber mb-2">Messages</div>
           <h1 className="font-display text-4xl text-foreground">Chat</h1>

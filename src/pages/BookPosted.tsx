@@ -9,7 +9,7 @@ const BookPosted = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <main className="max-w-md mx-auto px-5 pt-6 pb-32 relative z-10">
+      <main className="max-w-5xl mx-auto px-5 lg:px-10 pt-6 pb-32 relative z-10">
         <Link
           to="/"
           className="inline-flex items-center gap-2 text-xs text-muted-foreground hover:text-amber transition-colors"

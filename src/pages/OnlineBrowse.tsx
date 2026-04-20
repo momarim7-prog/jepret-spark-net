@@ -151,7 +151,7 @@ const OnlineBrowse = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <main className="max-w-md mx-auto px-5 pt-6 pb-32 relative z-10">
+      <main className="max-w-7xl mx-auto px-5 lg:px-10 pt-6 pb-32 relative z-10">
         <Link
           to="/"
           className="inline-flex items-center gap-2 text-xs text-muted-foreground hover:text-amber transition-colors"
@@ -171,7 +171,7 @@ const OnlineBrowse = () => {
           </p>
         </header>
 
-        <section className="mt-6 grid grid-cols-2 gap-3">
+        <section className="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 lg:gap-4">
           {gigs.map((g, i) => (
             <GigCard key={`${g.name}-${i}`} gig={g} index={i} />
           ))}
