@@ -61,22 +61,24 @@ const copyCode = (code: string) => {
 const Promos = () => {
   return (
     <div className="min-h-screen bg-background relative">
-      <main className="relative z-10 pb-32 max-w-6xl mx-auto px-5 lg:px-10 pt-10">
+      <main className="relative z-10 pb-32 max-w-7xl mx-auto px-5 lg:px-10 pt-10">
         <header className="mb-6">
           <div className="text-[10px] tracking-[0.3em] uppercase text-amber mb-2">Save More</div>
-          <h1 className="font-display text-4xl text-foreground">Promos</h1>
+          <h1 className="font-display text-4xl lg:text-5xl text-foreground">Promos</h1>
           <p className="text-sm text-muted-foreground mt-2">Hand-picked offers for the creative crowd.</p>
         </header>
 
         {/* Featured promo */}
-        <div className="relative overflow-hidden rounded-3xl p-6 mb-8 bg-gradient-golden shadow-amber">
-          <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-amber-glow/30 blur-3xl" />
-          <div className="relative">
+        <div className="relative overflow-hidden rounded-3xl p-6 lg:p-10 mb-8 bg-gradient-golden shadow-amber lg:flex lg:items-center lg:gap-10">
+          <div className="absolute -top-10 -right-10 w-40 h-40 lg:w-72 lg:h-72 rounded-full bg-amber-glow/30 blur-3xl" />
+          <div className="relative lg:flex-1">
             <Badge className="bg-background/20 text-primary-foreground border-0 backdrop-blur-sm mb-3">
               ✨ Featured
             </Badge>
-            <h2 className="font-display text-2xl text-primary-foreground leading-tight mb-1">{featured.title}</h2>
-            <p className="text-xs text-primary-foreground/80 mb-5">{featured.subtitle}</p>
+            <h2 className="font-display text-2xl lg:text-4xl text-primary-foreground leading-tight mb-1 lg:mb-2">{featured.title}</h2>
+            <p className="text-xs lg:text-sm text-primary-foreground/80 mb-5">{featured.subtitle}</p>
+          </div>
+          <div className="relative lg:w-80 lg:shrink-0">
             <button
               onClick={() => copyCode(featured.code)}
               className="w-full flex items-center justify-between bg-background/15 hover:bg-background/25 transition-colors backdrop-blur-md rounded-xl px-4 py-3 border border-background/20"
@@ -95,7 +97,7 @@ const Promos = () => {
         </div>
 
         <h3 className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-3">All Promos</h3>
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
           {promos.map((p) => (
             <li key={p.code} className="glass rounded-2xl p-4 flex items-start gap-3">
               <div className="w-12 h-12 rounded-xl bg-secondary border border-border flex items-center justify-center shrink-0">

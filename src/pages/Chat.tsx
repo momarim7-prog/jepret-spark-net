@@ -76,21 +76,21 @@ const chats = [
 const Chat = () => {
   return (
     <div className="min-h-screen bg-background relative">
-      <main className="relative z-10 pb-32 max-w-3xl mx-auto px-5 lg:px-10 pt-10">
+      <main className="relative z-10 pb-32 max-w-7xl mx-auto px-5 lg:px-10 pt-10">
         <header className="mb-6">
           <div className="text-[10px] tracking-[0.3em] uppercase text-amber mb-2">Messages</div>
-          <h1 className="font-display text-4xl text-foreground">Chat</h1>
+          <h1 className="font-display text-4xl lg:text-5xl text-foreground">Chat</h1>
         </header>
 
-        <div className="relative mb-6">
+        <div className="relative mb-6 max-w-xl">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <Input placeholder="Search conversations" className="pl-9 bg-secondary/50 border-border/60" />
         </div>
 
-        <ul className="space-y-1">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
           {chats.map((c) => (
             <li key={c.id}>
-              <button className="w-full text-left flex items-center gap-3 p-3 rounded-2xl hover:bg-secondary/60 transition-colors">
+              <button className="w-full text-left flex items-center gap-3 p-3 rounded-2xl border border-transparent md:border-border/40 md:bg-card/40 hover:bg-secondary/60 hover:border-amber/40 transition-colors h-full">
                 <div className="relative shrink-0">
                   <Avatar className="w-12 h-12 ring-1 ring-border/60">
                     <AvatarImage src={c.avatar} alt={c.name} />
