@@ -1,5 +1,6 @@
 import { Star, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import t1 from "@/assets/talent-1.jpg";
 import t2 from "@/assets/talent-2.jpg";
 import t3 from "@/assets/talent-3.jpg";
@@ -13,6 +14,7 @@ const talents = [
 ];
 
 const TalentGrid = () => {
+  const navigate = useNavigate();
   return (
     <section className="px-5 mt-12">
       <div className="flex items-end justify-between mb-4">
@@ -29,6 +31,7 @@ const TalentGrid = () => {
         {talents.map((t, i) => (
           <motion.button
             key={t.name}
+            onClick={() => navigate(`/talent/${i + 1}`)}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
