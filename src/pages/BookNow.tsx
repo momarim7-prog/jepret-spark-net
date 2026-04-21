@@ -251,15 +251,6 @@ const BookNow = () => {
             </Popover>
           </Field>
 
-          <Field icon={Calendar} label="When?">
-            <Input
-              value={form.when}
-              onChange={(e) => setForm({ ...form, when: e.target.value })}
-              placeholder="ASAP / 18:00 hari ini"
-              maxLength={60}
-            />
-          </Field>
-
           <Field icon={MapPin} label="Where?">
             <Input
               value={form.where}
