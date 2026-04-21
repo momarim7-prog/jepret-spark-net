@@ -279,6 +279,47 @@ const BookNow = () => {
             </Popover>
           </Field>
 
+          {isLater && (
+            <Field icon={CalendarIcon} label="When?">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <Popover open={dateOpen} onOpenChange={setDateOpen}>
+                  <PopoverTrigger asChild>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      className={cn(
+                        "w-full justify-start text-left font-normal h-10",
+                        !form.whenDate && "text-muted-foreground"
+                      )}
+                    >
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {form.whenDate ? format(form.whenDate, "PPP") : "Pilih tanggal"}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={form.whenDate}
+                      onSelect={(d) => {
+                        setForm({ ...form, whenDate: d });
+                        setDateOpen(false);
+                      }}
+                      disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
+                      initialFocus
+                      className={cn("p-3 pointer-events-auto")}
+                    />
+                  </PopoverContent>
+                </Popover>
+                <Input
+                  type="time"
+                  value={form.whenTime}
+                  onChange={(e) => setForm({ ...form, whenTime: e.target.value })}
+                  className="h-10"
+                />
+              </div>
+            </Field>
+          )}
+
           <Field icon={MapPin} label="Where?">
             <Input
               value={form.where}
