@@ -20,7 +20,7 @@ const HeroSearch = () => {
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <input
               type="text"
-              placeholder="Cari Fotoin, Videoin, Editor…"
+              placeholder="CARI FOTOGRAFER, VIDEOGRAFER, EDITOR, ..."
               className="w-full bg-background/95 backdrop-blur-sm border border-border/50 rounded-full pl-11 pr-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:border-amber/60 shadow-deep transition-all"
             />
           </div>
