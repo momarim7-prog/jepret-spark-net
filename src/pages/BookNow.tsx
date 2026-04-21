@@ -122,6 +122,19 @@ const BookNow = () => {
     duration: "",
     notes: "",
   });
+  const [occasionOpen, setOccasionOpen] = useState(false);
+  const [occasionSearch, setOccasionSearch] = useState("");
+
+  const handleOccasionSelect = (value: string) => {
+    setForm({ ...form, occasion: value });
+    setOccasionSearch("");
+    setOccasionOpen(false);
+  };
+
+  const trimmedSearch = occasionSearch.trim();
+  const hasMatch = trimmedSearch
+    ? ALL_OCCASIONS.some((o) => o.toLowerCase().includes(trimmedSearch.toLowerCase()))
+    : true;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
