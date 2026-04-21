@@ -1,27 +1,77 @@
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Briefcase, Calendar, MapPin, Clock, FileText } from "lucide-react";
+import { ArrowLeft, Briefcase, Calendar, MapPin, Clock, FileText, ChevronsUpDown, Check } from "lucide-react";
 import { z } from "zod";
 import TalentMap from "@/components/TalentMap";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 
-const OCCASION_OPTIONS = [
-  "Wedding Outdoor",
-  "Wedding Indoor",
-  "Product Shoot",
-  "Event Documentation",
-  "Nightclub Event Documentation",
-  "Photoshoot",
+const OCCASION_GROUPS: { heading: string; options: string[] }[] = [
+  {
+    heading: "Social & Celebrations",
+    options: [
+      "Wedding (Indoor)",
+      "Engagement / Sangjit",
+      "Pre-Wedding / Engagement Session",
+      "Birthday Party (Adult)",
+      "Kids' Birthday / Baby Shower",
+      "Graduation / Convocation",
+      "Anniversary",
+      "Prom / Formal Night",
+      "Holiday / Family Gathering",
+    ],
+  },
+  {
+    heading: "Corporate & Professional",
+    options: [
+      "Conference / Seminar",
+      "Product Launch",
+      "Company Gathering / Outing",
+      "Gala Dinner",
+      "Workshop / Masterclass",
+      "Corporate Headshots / Branding",
+      "Office / Architectural Photography",
+      "Exhibition / Trade Show",
+    ],
+  },
+  {
+    heading: "Lifestyle & Nightlife",
+    options: [
+      "Music Festival / Concert",
+      "Club Night / DJ Performance",
+      "Fashion Show",
+      "Sporting Event / Tournament",
+      "Street / Urban Photography",
+      "Automotive / Car Meet",
+    ],
+  },
+  {
+    heading: "Personal & Studio",
+    options: [
+      "Maternity Session",
+      "Newborn / Toddler Portrait",
+      "Personal Branding / Portfolio",
+      "Pet Photography",
+      "Food & Beverage (Menu/Commercial)",
+      "Interior / Real Estate",
+      "Other",
+    ],
+  },
 ];
+
+const ALL_OCCASIONS = OCCASION_GROUPS.flatMap((g) => g.options);
 
 const SERVICE_LABELS: Record<string, string> = {
   fotoin: "Fotoin",
