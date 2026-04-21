@@ -91,6 +91,17 @@ const jobSchema = z.object({
   where: z.string().trim().min(2, "Lokasi wajib diisi").max(200),
   duration: z.string().trim().min(1, "Durasi wajib diisi").max(40),
   notes: z.string().trim().max(1000).optional(),
+  whenDate: z.date().optional(),
+  whenTime: z.string().optional(),
+});
+
+const buildLaterSchema = jobSchema.superRefine((data, ctx) => {
+  if (!data.whenDate) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Tanggal wajib dipilih", path: ["whenDate"] });
+  }
+  if (!data.whenTime) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Jam wajib diisi", path: ["whenTime"] });
+  }
 });
 
 const Field = ({
