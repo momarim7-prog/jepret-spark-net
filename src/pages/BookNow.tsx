@@ -186,10 +186,10 @@ const BookNow = () => {
 
         <div className="mt-5">
           <span className="text-[10px] uppercase tracking-[0.3em] text-amber font-semibold">
-            Book NOW · {label}
+            {isLater ? "Book for later" : "Book NOW"} · {label}
           </span>
           <h1 className="font-display text-2xl mt-2 leading-tight">
-            Talent terdekat di sekitarmu
+            {isLater ? "Jadwalkan talent untuk harimu" : "Talent terdekat di sekitarmu"}
           </h1>
         </div>
 
