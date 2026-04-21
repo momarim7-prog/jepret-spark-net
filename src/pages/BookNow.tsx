@@ -5,7 +5,23 @@ import { z } from "zod";
 import TalentMap from "@/components/TalentMap";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { toast } from "sonner";
+
+const OCCASION_OPTIONS = [
+  "Wedding Outdoor",
+  "Wedding Indoor",
+  "Product Shoot",
+  "Event Documentation",
+  "Nightclub Event Documentation",
+  "Photoshoot",
+];
 
 const SERVICE_LABELS: Record<string, string> = {
   fotoin: "Fotoin",
@@ -94,12 +110,21 @@ const BookNow = () => {
           <h2 className="font-display text-xl">Detail pekerjaan</h2>
 
           <Field icon={Briefcase} label="What's the occasion?">
-            <Input
+            <Select
               value={form.occasion}
-              onChange={(e) => setForm({ ...form, occasion: e.target.value })}
-              placeholder="Contoh: Wedding outdoor, product shoot…"
-              maxLength={120}
-            />
+              onValueChange={(value) => setForm({ ...form, occasion: value })}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Pilih occasion…" />
+              </SelectTrigger>
+              <SelectContent>
+                {OCCASION_OPTIONS.map((opt) => (
+                  <SelectItem key={opt} value={opt}>
+                    {opt}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </Field>
 
           <Field icon={Calendar} label="When?">
