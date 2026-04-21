@@ -1,27 +1,77 @@
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Briefcase, Calendar, MapPin, Clock, FileText } from "lucide-react";
+import { ArrowLeft, Briefcase, Calendar, MapPin, Clock, FileText, ChevronsUpDown, Check } from "lucide-react";
 import { z } from "zod";
 import TalentMap from "@/components/TalentMap";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 
-const OCCASION_OPTIONS = [
-  "Wedding Outdoor",
-  "Wedding Indoor",
-  "Product Shoot",
-  "Event Documentation",
-  "Nightclub Event Documentation",
-  "Photoshoot",
+const OCCASION_GROUPS: { heading: string; options: string[] }[] = [
+  {
+    heading: "Social & Celebrations",
+    options: [
+      "Wedding (Indoor)",
+      "Engagement / Sangjit",
+      "Pre-Wedding / Engagement Session",
+      "Birthday Party (Adult)",
+      "Kids' Birthday / Baby Shower",
+      "Graduation / Convocation",
+      "Anniversary",
+      "Prom / Formal Night",
+      "Holiday / Family Gathering",
+    ],
+  },
+  {
+    heading: "Corporate & Professional",
+    options: [
+      "Conference / Seminar",
+      "Product Launch",
+      "Company Gathering / Outing",
+      "Gala Dinner",
+      "Workshop / Masterclass",
+      "Corporate Headshots / Branding",
+      "Office / Architectural Photography",
+      "Exhibition / Trade Show",
+    ],
+  },
+  {
+    heading: "Lifestyle & Nightlife",
+    options: [
+      "Music Festival / Concert",
+      "Club Night / DJ Performance",
+      "Fashion Show",
+      "Sporting Event / Tournament",
+      "Street / Urban Photography",
+      "Automotive / Car Meet",
+    ],
+  },
+  {
+    heading: "Personal & Studio",
+    options: [
+      "Maternity Session",
+      "Newborn / Toddler Portrait",
+      "Personal Branding / Portfolio",
+      "Pet Photography",
+      "Food & Beverage (Menu/Commercial)",
+      "Interior / Real Estate",
+      "Other",
+    ],
+  },
 ];
+
+const ALL_OCCASIONS = OCCASION_GROUPS.flatMap((g) => g.options);
 
 const SERVICE_LABELS: Record<string, string> = {
   fotoin: "Fotoin",
@@ -72,6 +122,19 @@ const BookNow = () => {
     duration: "",
     notes: "",
   });
+  const [occasionOpen, setOccasionOpen] = useState(false);
+  const [occasionSearch, setOccasionSearch] = useState("");
+
+  const handleOccasionSelect = (value: string) => {
+    setForm({ ...form, occasion: value });
+    setOccasionSearch("");
+    setOccasionOpen(false);
+  };
+
+  const trimmedSearch = occasionSearch.trim();
+  const hasMatch = trimmedSearch
+    ? ALL_OCCASIONS.some((o) => o.toLowerCase().includes(trimmedSearch.toLowerCase()))
+    : true;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -110,21 +173,82 @@ const BookNow = () => {
           <h2 className="font-display text-xl">Detail pekerjaan</h2>
 
           <Field icon={Briefcase} label="What's the occasion?">
-            <Select
-              value={form.occasion}
-              onValueChange={(value) => setForm({ ...form, occasion: value })}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Pilih occasion…" />
-              </SelectTrigger>
-              <SelectContent>
-                {OCCASION_OPTIONS.map((opt) => (
-                  <SelectItem key={opt} value={opt}>
-                    {opt}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <Popover open={occasionOpen} onOpenChange={setOccasionOpen}>
+              <PopoverTrigger asChild>
+                <Button
+                  type="button"
+                  variant="outline"
+                  role="combobox"
+                  aria-expanded={occasionOpen}
+                  className={cn(
+                    "w-full justify-between font-normal h-10",
+                    !form.occasion && "text-muted-foreground"
+                  )}
+                >
+                  {form.occasion || "Pilih atau ketik occasion…"}
+                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-[--radix-popover-trigger-width] p-0" align="start">
+                <Command
+                  filter={(value, search) => {
+                    if (!search) return 1;
+                    return value.toLowerCase().includes(search.toLowerCase()) ? 1 : 0;
+                  }}
+                >
+                  <CommandInput
+                    placeholder="Cari occasion…"
+                    value={occasionSearch}
+                    onValueChange={setOccasionSearch}
+                  />
+                  <CommandList>
+                    <CommandEmpty>
+                      {trimmedSearch ? (
+                        <button
+                          type="button"
+                          onClick={() => handleOccasionSelect(trimmedSearch)}
+                          className="w-full text-left px-2 py-2 text-sm hover:bg-accent rounded-sm"
+                        >
+                          Use "<span className="font-semibold">{trimmedSearch}</span>" (Other)
+                        </button>
+                      ) : (
+                        "Tidak ditemukan."
+                      )}
+                    </CommandEmpty>
+                    {OCCASION_GROUPS.map((group) => (
+                      <CommandGroup key={group.heading} heading={group.heading}>
+                        {group.options.map((opt) => (
+                          <CommandItem
+                            key={opt}
+                            value={opt}
+                            onSelect={() => handleOccasionSelect(opt)}
+                          >
+                            <Check
+                              className={cn(
+                                "mr-2 h-4 w-4",
+                                form.occasion === opt ? "opacity-100" : "opacity-0"
+                              )}
+                            />
+                            {opt}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    ))}
+                    {trimmedSearch && !hasMatch && (
+                      <CommandGroup heading="Custom">
+                        <CommandItem
+                          value={`__custom_${trimmedSearch}`}
+                          onSelect={() => handleOccasionSelect(trimmedSearch)}
+                        >
+                          <Check className="mr-2 h-4 w-4 opacity-0" />
+                          Use "{trimmedSearch}" (Other)
+                        </CommandItem>
+                      </CommandGroup>
+                    )}
+                  </CommandList>
+                </Command>
+              </PopoverContent>
+            </Popover>
           </Field>
 
           <Field icon={Calendar} label="When?">
