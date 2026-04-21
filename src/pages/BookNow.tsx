@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Briefcase, Calendar, MapPin, Clock, FileText, ChevronsUpDown, Check } from "lucide-react";
+import { ArrowLeft, Briefcase, MapPin, Clock, FileText, ChevronsUpDown, Check } from "lucide-react";
 import { z } from "zod";
 import TalentMap from "@/components/TalentMap";
 import { Input } from "@/components/ui/input";
@@ -86,7 +86,6 @@ const SERVICE_LABELS: Record<string, string> = {
 
 const jobSchema = z.object({
   occasion: z.string().trim().min(2, "Occasion wajib diisi").max(120),
-  when: z.string().trim().min(1, "Waktu wajib diisi").max(60),
   where: z.string().trim().min(2, "Lokasi wajib diisi").max(200),
   duration: z.string().trim().min(1, "Durasi wajib diisi").max(40),
   notes: z.string().trim().max(1000).optional(),
@@ -117,7 +116,6 @@ const BookNow = () => {
 
   const [form, setForm] = useState({
     occasion: "",
-    when: "ASAP (hari ini)",
     where: "",
     duration: "",
     notes: "",
@@ -249,15 +247,6 @@ const BookNow = () => {
                 </Command>
               </PopoverContent>
             </Popover>
-          </Field>
-
-          <Field icon={Calendar} label="When?">
-            <Input
-              value={form.when}
-              onChange={(e) => setForm({ ...form, when: e.target.value })}
-              placeholder="ASAP / 18:00 hari ini"
-              maxLength={60}
-            />
           </Field>
 
           <Field icon={MapPin} label="Where?">
