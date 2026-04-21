@@ -8,6 +8,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Hatchway';
+  src: url('/src/assets/fonts/Hatchway-Black.ttf') format('truetype');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -97,7 +105,7 @@
   }
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Talina', 'Inter', system-ui, sans-serif;
+    font-family: 'Hatchway', system-ui, sans-serif;
     font-feature-settings: 'ss01', 'cv11';
     background-image:
       radial-gradient(ellipse 80% 50% at 50% -10%, hsl(0 85% 55% / 0.1), transparent),
