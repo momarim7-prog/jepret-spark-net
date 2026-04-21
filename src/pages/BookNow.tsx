@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Briefcase, Calendar, MapPin, Clock, FileText, ChevronsUpDown, Check } from "lucide-react";
+import { ArrowLeft, Briefcase, MapPin, Clock, FileText, ChevronsUpDown, Check } from "lucide-react";
 import { z } from "zod";
 import TalentMap from "@/components/TalentMap";
 import { Input } from "@/components/ui/input";
