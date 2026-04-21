@@ -116,7 +116,6 @@ const BookNow = () => {
 
   const [form, setForm] = useState({
     occasion: "",
-    when: "ASAP (hari ini)",
     where: "",
     duration: "",
     notes: "",
