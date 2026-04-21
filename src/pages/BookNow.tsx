@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Briefcase, MapPin, Clock, FileText, ChevronsUpDown, Check } from "lucide-react";
+import { Link, useNavigate, useParams, useLocation } from "react-router-dom";
+import { ArrowLeft, Briefcase, MapPin, Clock, FileText, ChevronsUpDown, Check, CalendarIcon } from "lucide-react";
 import { z } from "zod";
+import { format } from "date-fns";
 import TalentMap from "@/components/TalentMap";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
   Command,
@@ -89,6 +91,17 @@ const jobSchema = z.object({
   where: z.string().trim().min(2, "Lokasi wajib diisi").max(200),
   duration: z.string().trim().min(1, "Durasi wajib diisi").max(40),
   notes: z.string().trim().max(1000).optional(),
+  whenDate: z.date().optional(),
+  whenTime: z.string().optional(),
+});
+
+const buildLaterSchema = jobSchema.superRefine((data, ctx) => {
+  if (!data.whenDate) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Tanggal wajib dipilih", path: ["whenDate"] });
+  }
+  if (!data.whenTime) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Jam wajib diisi", path: ["whenTime"] });
+  }
 });
 
 const Field = ({
@@ -112,16 +125,28 @@ const Field = ({
 const BookNow = () => {
   const { type, slug } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+  const isLater = location.pathname.endsWith("/later");
   const label = (slug && SERVICE_LABELS[slug]) || "Layanan";
 
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<{
+    occasion: string;
+    where: string;
+    duration: string;
+    notes: string;
+    whenDate: Date | undefined;
+    whenTime: string;
+  }>({
     occasion: "",
     where: "",
     duration: "",
     notes: "",
+    whenDate: undefined,
+    whenTime: "",
   });
   const [occasionOpen, setOccasionOpen] = useState(false);
   const [occasionSearch, setOccasionSearch] = useState("");
+  const [dateOpen, setDateOpen] = useState(false);
 
   const handleOccasionSelect = (value: string) => {
     setForm({ ...form, occasion: value });
@@ -136,12 +161,17 @@ const BookNow = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const result = jobSchema.safeParse(form);
+    const schema = isLater ? buildLaterSchema : jobSchema;
+    const result = schema.safeParse(form);
     if (!result.success) {
       toast.error(result.error.issues[0].message);
       return;
     }
-    navigate(`/book/${type}/${slug}/posted`, { state: form });
+    const payload = {
+      ...form,
+      whenDate: form.whenDate ? form.whenDate.toISOString() : undefined,
+    };
+    navigate(`/book/${type}/${slug}/posted`, { state: payload });
   };
 
   return (
@@ -156,10 +186,10 @@ const BookNow = () => {
 
         <div className="mt-5">
           <span className="text-[10px] uppercase tracking-[0.3em] text-amber font-semibold">
-            Book NOW · {label}
+            {isLater ? "Book for later" : "Book NOW"} · {label}
           </span>
           <h1 className="font-display text-2xl mt-2 leading-tight">
-            Talent terdekat di sekitarmu
+            {isLater ? "Jadwalkan talent untuk harimu" : "Talent terdekat di sekitarmu"}
           </h1>
         </div>
 
@@ -248,6 +278,47 @@ const BookNow = () => {
               </PopoverContent>
             </Popover>
           </Field>
+
+          {isLater && (
+            <Field icon={CalendarIcon} label="When?">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <Popover open={dateOpen} onOpenChange={setDateOpen}>
+                  <PopoverTrigger asChild>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      className={cn(
+                        "w-full justify-start text-left font-normal h-10",
+                        !form.whenDate && "text-muted-foreground"
+                      )}
+                    >
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {form.whenDate ? format(form.whenDate, "PPP") : "Pilih tanggal"}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={form.whenDate}
+                      onSelect={(d) => {
+                        setForm({ ...form, whenDate: d });
+                        setDateOpen(false);
+                      }}
+                      disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
+                      initialFocus
+                      className={cn("p-3 pointer-events-auto")}
+                    />
+                  </PopoverContent>
+                </Popover>
+                <Input
+                  type="time"
+                  value={form.whenTime}
+                  onChange={(e) => setForm({ ...form, whenTime: e.target.value })}
+                  className="h-10"
+                />
+              </div>
+            </Field>
+          )}
 
           <Field icon={MapPin} label="Where?">
             <Input
