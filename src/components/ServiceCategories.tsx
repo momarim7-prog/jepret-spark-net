@@ -19,7 +19,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 const onsiteCategories = [
-  { name: "Fotoin", Icon: Camera, slug: "fotoin" },
+  { name: "Fotoin\n", Icon: Camera, slug: "fotoin" },
   { name: "Videoin", Icon: Video, slug: "videoin" },
   { name: "Make-up-in", Icon: Brush, slug: "makeupin" },
   { name: "Style-in", Icon: Shirt, slug: "stylein" },
