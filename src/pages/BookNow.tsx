@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Briefcase, MapPin, Clock, FileText, ChevronsUpDown, Check } from "lucide-react";
+import { Link, useNavigate, useParams, useLocation } from "react-router-dom";
+import { ArrowLeft, Briefcase, MapPin, Clock, FileText, ChevronsUpDown, Check, CalendarIcon } from "lucide-react";
 import { z } from "zod";
+import { format } from "date-fns";
 import TalentMap from "@/components/TalentMap";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
   Command,
