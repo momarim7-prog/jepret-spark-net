@@ -86,7 +86,6 @@ const SERVICE_LABELS: Record<string, string> = {
 
 const jobSchema = z.object({
   occasion: z.string().trim().min(2, "Occasion wajib diisi").max(120),
-  when: z.string().trim().min(1, "Waktu wajib diisi").max(60),
   where: z.string().trim().min(2, "Lokasi wajib diisi").max(200),
   duration: z.string().trim().min(1, "Durasi wajib diisi").max(40),
   notes: z.string().trim().max(1000).optional(),
