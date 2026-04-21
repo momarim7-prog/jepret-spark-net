@@ -125,16 +125,28 @@ const Field = ({
 const BookNow = () => {
   const { type, slug } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+  const isLater = location.pathname.endsWith("/later");
   const label = (slug && SERVICE_LABELS[slug]) || "Layanan";
 
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<{
+    occasion: string;
+    where: string;
+    duration: string;
+    notes: string;
+    whenDate: Date | undefined;
+    whenTime: string;
+  }>({
     occasion: "",
     where: "",
     duration: "",
     notes: "",
+    whenDate: undefined,
+    whenTime: "",
   });
   const [occasionOpen, setOccasionOpen] = useState(false);
   const [occasionSearch, setOccasionSearch] = useState("");
+  const [dateOpen, setDateOpen] = useState(false);
 
   const handleOccasionSelect = (value: string) => {
     setForm({ ...form, occasion: value });
@@ -149,12 +161,17 @@ const BookNow = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const result = jobSchema.safeParse(form);
+    const schema = isLater ? buildLaterSchema : jobSchema;
+    const result = schema.safeParse(form);
     if (!result.success) {
       toast.error(result.error.issues[0].message);
       return;
     }
-    navigate(`/book/${type}/${slug}/posted`, { state: form });
+    const payload = {
+      ...form,
+      whenDate: form.whenDate ? form.whenDate.toISOString() : undefined,
+    };
+    navigate(`/book/${type}/${slug}/posted`, { state: payload });
   };
 
   return (
