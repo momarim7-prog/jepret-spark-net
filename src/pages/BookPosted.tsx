@@ -54,6 +54,31 @@ const BookPosted = () => {
                 </span>
               </div>
             )}
+
+            {/* Finding Freelancer progress */}
+            <div className="mt-6 rounded-2xl border border-amber/20 bg-background/40 p-4">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-2.5">
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="absolute inline-flex h-full w-full rounded-full bg-amber opacity-75 animate-ping" />
+                    <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-amber shadow-[0_0_10px_hsl(var(--amber))]" />
+                  </span>
+                  <span className="text-[11px] uppercase tracking-[0.25em] text-amber font-semibold">
+                    Finding freelancer
+                  </span>
+                </div>
+                <span className="text-[10px] text-muted-foreground font-mono">Live</span>
+              </div>
+
+              <div className="relative h-1.5 w-full overflow-hidden rounded-full bg-amber/10">
+                <motion.div
+                  initial={{ x: "-100%" }}
+                  animate={{ x: "100%" }}
+                  transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute inset-y-0 w-1/2 bg-gradient-to-r from-transparent via-amber to-transparent"
+                />
+              </div>
+            </div>
           </div>
         </motion.div>
 
