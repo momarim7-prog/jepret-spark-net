@@ -49,7 +49,7 @@ const RoleSelect = () => {
             <div className="w-14 h-14 rounded-2xl bg-gradient-golden flex items-center justify-center mb-6 shadow-amber">
               <Briefcase className="w-7 h-7 text-primary-foreground" />
             </div>
-            <h2 className="font-display text-3xl mb-2">Klien</h2>
+            <h2 className="font-display text-3xl mb-2">Businesses</h2>
             <p className="text-sm text-muted-foreground normal-case tracking-normal">
               Mencari freelancer untuk proyek kreatif Anda
             </p>

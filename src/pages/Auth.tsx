@@ -42,13 +42,22 @@ const Auth = () => {
     setSubmitting(true);
     try {
       if (mode === "signup") {
-        const { error } = await supabase.auth.signUp({
+        const { data, error } = await supabase.auth.signUp({
           email: parsed.data.email,
           password: parsed.data.password,
           options: { emailRedirectTo: `${window.location.origin}/auth/role` },
         });
         if (error) throw error;
-        toast({ title: "Akun dibuat", description: "Pilih peran Anda untuk melanjutkan." });
+        // If session exists (email auto-confirm enabled), user is signed in.
+        // Otherwise prompt them to confirm via email.
+        if (!data.session) {
+          toast({
+            title: "Periksa email Anda",
+            description: "Kami mengirim tautan konfirmasi. Klik untuk melanjutkan.",
+          });
+        } else {
+          toast({ title: "Akun dibuat", description: "Pilih peran Anda untuk melanjutkan." });
+        }
       } else {
         const { error } = await supabase.auth.signInWithPassword({
           email: parsed.data.email,
