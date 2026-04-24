@@ -14,6 +14,134 @@ export type Database = {
   }
   public: {
     Tables: {
+      job_applications: {
+        Row: {
+          created_at: string
+          freelancer_id: string
+          id: string
+          job_id: string
+          message: string | null
+          status: Database["public"]["Enums"]["application_status"]
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          freelancer_id: string
+          id?: string
+          job_id: string
+          message?: string | null
+          status?: Database["public"]["Enums"]["application_status"]
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          freelancer_id?: string
+          id?: string
+          job_id?: string
+          message?: string | null
+          status?: Database["public"]["Enums"]["application_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "job_applications_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "jobs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      jobs: {
+        Row: {
+          accepted_freelancer_id: string | null
+          budget_idr: number | null
+          category: Database["public"]["Enums"]["service_category"]
+          client_id: string
+          created_at: string
+          description: string
+          id: string
+          location_address: string | null
+          location_lat: number | null
+          location_lng: number | null
+          paused: boolean
+          scheduled_at: string | null
+          status: Database["public"]["Enums"]["job_status"]
+          title: string
+          type: Database["public"]["Enums"]["job_type"]
+          updated_at: string
+        }
+        Insert: {
+          accepted_freelancer_id?: string | null
+          budget_idr?: number | null
+          category: Database["public"]["Enums"]["service_category"]
+          client_id: string
+          created_at?: string
+          description: string
+          id?: string
+          location_address?: string | null
+          location_lat?: number | null
+          location_lng?: number | null
+          paused?: boolean
+          scheduled_at?: string | null
+          status?: Database["public"]["Enums"]["job_status"]
+          title: string
+          type: Database["public"]["Enums"]["job_type"]
+          updated_at?: string
+        }
+        Update: {
+          accepted_freelancer_id?: string | null
+          budget_idr?: number | null
+          category?: Database["public"]["Enums"]["service_category"]
+          client_id?: string
+          created_at?: string
+          description?: string
+          id?: string
+          location_address?: string | null
+          location_lat?: number | null
+          location_lng?: number | null
+          paused?: boolean
+          scheduled_at?: string | null
+          status?: Database["public"]["Enums"]["job_status"]
+          title?: string
+          type?: Database["public"]["Enums"]["job_type"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      notifications: {
+        Row: {
+          body: string | null
+          created_at: string
+          id: string
+          link: string | null
+          read: boolean
+          title: string
+          type: Database["public"]["Enums"]["notification_type"]
+          user_id: string
+        }
+        Insert: {
+          body?: string | null
+          created_at?: string
+          id?: string
+          link?: string | null
+          read?: boolean
+          title: string
+          type: Database["public"]["Enums"]["notification_type"]
+          user_id: string
+        }
+        Update: {
+          body?: string | null
+          created_at?: string
+          id?: string
+          link?: string | null
+          read?: boolean
+          title?: string
+          type?: Database["public"]["Enums"]["notification_type"]
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           account_type: string | null
@@ -62,6 +190,44 @@ export type Database = {
         }
         Relationships: []
       }
+      reviews: {
+        Row: {
+          client_id: string
+          comment: string | null
+          created_at: string
+          freelancer_id: string
+          id: string
+          job_id: string
+          rating: number
+        }
+        Insert: {
+          client_id: string
+          comment?: string | null
+          created_at?: string
+          freelancer_id: string
+          id?: string
+          job_id: string
+          rating: number
+        }
+        Update: {
+          client_id?: string
+          comment?: string | null
+          created_at?: string
+          freelancer_id?: string
+          id?: string
+          job_id?: string
+          rating?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reviews_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "jobs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -102,6 +268,31 @@ export type Database = {
     }
     Enums: {
       app_role: "client" | "freelancer"
+      application_status: "pending" | "accepted" | "declined"
+      job_status:
+        | "posted"
+        | "accepted"
+        | "in_progress"
+        | "completed"
+        | "paid"
+        | "cancelled"
+      job_type: "onsite" | "remote"
+      notification_type:
+        | "new_applicant"
+        | "application_status"
+        | "new_message"
+        | "payment_confirmed"
+        | "review_received"
+      service_category:
+        | "fotoin"
+        | "videoin"
+        | "sutradarain"
+        | "editin"
+        | "desain_in"
+        | "tigadi_in"
+        | "musik_in"
+        | "voice_in"
+        | "lainnya"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -230,6 +421,34 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["client", "freelancer"],
+      application_status: ["pending", "accepted", "declined"],
+      job_status: [
+        "posted",
+        "accepted",
+        "in_progress",
+        "completed",
+        "paid",
+        "cancelled",
+      ],
+      job_type: ["onsite", "remote"],
+      notification_type: [
+        "new_applicant",
+        "application_status",
+        "new_message",
+        "payment_confirmed",
+        "review_received",
+      ],
+      service_category: [
+        "fotoin",
+        "videoin",
+        "sutradarain",
+        "editin",
+        "desain_in",
+        "tigadi_in",
+        "musik_in",
+        "voice_in",
+        "lainnya",
+      ],
     },
   },
 } as const
