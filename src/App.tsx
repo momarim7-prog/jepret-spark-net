@@ -22,6 +22,12 @@ import RoleSelect from "./pages/RoleSelect.tsx";
 import ClientOnboarding from "./pages/onboarding/ClientOnboarding.tsx";
 import FreelancerOnboarding from "./pages/onboarding/FreelancerOnboarding.tsx";
 import ClientHome from "./pages/client/ClientHome.tsx";
+import ClientProfile from "./pages/client/ClientProfile.tsx";
+import ClientPost from "./pages/client/ClientPost.tsx";
+import ClientBookings from "./pages/client/ClientBookings.tsx";
+import ClientBookingDetail from "./pages/client/ClientBookingDetail.tsx";
+import ClientNotifications from "./pages/client/ClientNotifications.tsx";
+import ClientDiscover from "./pages/client/ClientDiscover.tsx";
 import FreelancerHome from "./pages/freelancer/FreelancerHome.tsx";
 import Terms from "./pages/Terms.tsx";
 import Privacy from "./pages/Privacy.tsx";
@@ -74,6 +80,12 @@ const App = () => (
                 </ProtectedRoute>
               }
             />
+            <Route path="/client/profile" element={<ProtectedRoute requireRole="client"><ClientProfile /></ProtectedRoute>} />
+            <Route path="/client/post" element={<ProtectedRoute requireRole="client"><ClientPost /></ProtectedRoute>} />
+            <Route path="/client/bookings" element={<ProtectedRoute requireRole="client"><ClientBookings /></ProtectedRoute>} />
+            <Route path="/client/bookings/:id" element={<ProtectedRoute requireRole="client"><ClientBookingDetail /></ProtectedRoute>} />
+            <Route path="/client/notifications" element={<ProtectedRoute requireRole="client"><ClientNotifications /></ProtectedRoute>} />
+            <Route path="/client/discover" element={<ProtectedRoute requireRole="client"><ClientDiscover /></ProtectedRoute>} />
             <Route path="/client" element={<Navigate to="/client/home" replace />} />
 
             {/* Freelancer area */}

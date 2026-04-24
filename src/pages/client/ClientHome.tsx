@@ -1,39 +1,87 @@
+import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import { Button } from "@/components/ui/button";
-import BottomNav from "@/components/BottomNav";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import ClientLayout from "@/components/client/ClientLayout";
 import HeroSearch from "@/components/HeroSearch";
 import ServiceCategories from "@/components/ServiceCategories";
-import TalentGrid from "@/components/TalentGrid";
-import InvoicePreview from "@/components/InvoicePreview";
-import { LogOut } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { PlusCircle, ClipboardList, MapPin, Sparkles } from "lucide-react";
 
 const ClientHome = () => {
-  const { profile, signOut } = useAuth();
+  const { user, profile } = useAuth();
   const navigate = useNavigate();
+  const [stats, setStats] = useState({ active: 0, completed: 0 });
+
+  useEffect(() => {
+    if (!user) return;
+    (async () => {
+      const { data } = await supabase
+        .from("jobs")
+        .select("status")
+        .eq("client_id", user.id);
+      const list = data ?? [];
+      setStats({
+        active: list.filter((j) => ["posted", "accepted", "in_progress"].includes(j.status)).length,
+        completed: list.filter((j) => ["completed", "paid"].includes(j.status)).length,
+      });
+    })();
+  }, [user]);
 
   return (
-    <div className="min-h-screen bg-background relative">
-      <main className="relative z-10 pb-32 max-w-7xl mx-auto">
-        <div className="flex items-center justify-between px-5 lg:px-10 pt-6">
-          <div>
-            <p className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground">Selamat datang</p>
-            <p className="font-display text-2xl">{profile?.full_name ?? "Klien"}</p>
-          </div>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={async () => { await signOut(); navigate("/auth"); }}
-            className="text-muted-foreground hover:text-foreground"
-          >
-            <LogOut className="w-5 h-5" />
-          </Button>
+    <ClientLayout>
+      <div className="px-5 lg:px-10 pt-8 max-w-5xl mx-auto">
+        <div>
+          <p className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground">Selamat datang</p>
+          <h1 className="font-display text-3xl lg:text-4xl">{profile?.full_name ?? "Klien"}</h1>
         </div>
+
+        <div className="grid grid-cols-2 gap-3 mt-6">
+          <button
+            onClick={() => navigate("/client/post")}
+            className="rounded-2xl p-5 text-left bg-gradient-golden text-primary-foreground shadow-amber hover:scale-[1.02] transition-transform"
+          >
+            <PlusCircle className="w-5 h-5 mb-2" />
+            <p className="font-display text-lg leading-tight">Post a Job</p>
+            <p className="text-xs opacity-80 mt-1">Cari talent baru</p>
+          </button>
+          <button
+            onClick={() => navigate("/client/bookings")}
+            className="rounded-2xl p-5 text-left bg-card border border-border/50 hover:border-amber/40 transition-colors"
+          >
+            <ClipboardList className="w-5 h-5 mb-2 text-amber" />
+            <p className="font-display text-lg leading-tight">Bookings</p>
+            <p className="text-xs text-muted-foreground mt-1">
+              {stats.active} aktif · {stats.completed} selesai
+            </p>
+          </button>
+        </div>
+
         <HeroSearch />
         <ServiceCategories />
-        <TalentGrid />
-        <InvoicePreview />
-        <footer className="px-5 lg:px-10 mt-14 text-center space-y-2">
+
+        <div className="mt-10 rounded-2xl border border-border/50 p-6 bg-card/50">
+          <div className="flex items-start gap-3">
+            <Sparkles className="w-5 h-5 text-amber mt-0.5" />
+            <div className="flex-1">
+              <p className="font-display text-lg">Temukan freelancer di sekitar</p>
+              <p className="text-xs text-muted-foreground mt-1">
+                Lihat kreator terdekat di peta — disaring berdasarkan kategori.
+              </p>
+              <Button
+                variant="outline"
+                size="sm"
+                className="mt-3"
+                onClick={() => navigate("/client/discover")}
+              >
+                <MapPin className="w-4 h-4 mr-2" />
+                Buka Peta
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        <footer className="mt-14 text-center space-y-2">
           <div className="flex justify-center gap-4 text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
             <a href="/terms" className="hover:text-foreground">Terms</a>
             <span>·</span>
@@ -41,9 +89,8 @@ const ClientHome = () => {
           </div>
           <div className="text-[10px] tracking-[0.3em] uppercase text-amber">Jepretin · Made in Indonesia</div>
         </footer>
-      </main>
-      <BottomNav />
-    </div>
+      </div>
+    </ClientLayout>
   );
 };
 
