@@ -13,7 +13,12 @@ const Index = () => {
         <TalentGrid />
         <InvoicePreview />
 
-        <footer className="px-5 lg:px-10 mt-14 text-center">
+        <footer className="px-5 lg:px-10 mt-14 text-center space-y-2">
+          <div className="flex justify-center gap-4 text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
+            <a href="/terms" className="hover:text-foreground transition-colors">Terms of Service</a>
+            <span>·</span>
+            <a href="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</a>
+          </div>
           <div className="text-[10px] tracking-[0.3em] uppercase text-amber">
             Jepretin · Made in Indonesia
           </div>
